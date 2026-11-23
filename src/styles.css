@@ -1,0 +1,368 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * Keep every @import in this top block. Web fonts load via <link> in src/routes/__root.tsx.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * "The Creative Developer's Pinboard" — light-only editorial palette.
+ * Pastel paper tones for panels, charcoal ink for type, one terracotta
+ * annotation ink for hand-drawn notes and arrows.
+ */
+
+@theme inline {
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  --font-hand: "Caveat", "Segoe Print", cursive;
+
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 6px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  /* Pinboard paper tones */
+  --color-ivory: var(--ivory);
+  --color-cream: var(--cream);
+  --color-sky: var(--sky);
+  --color-sage: var(--sage);
+  --color-lavender: var(--lavender);
+  --color-peach: var(--peach);
+  --color-butter: var(--butter);
+  /* Deeper inks that read on each paper tone */
+  --color-sky-ink: var(--sky-ink);
+  --color-sage-ink: var(--sage-ink);
+  --color-lavender-ink: var(--lavender-ink);
+  --color-peach-ink: var(--peach-ink);
+  --color-butter-ink: var(--butter-ink);
+  --color-ink: var(--ink);
+  --color-annotation: var(--annotation);
+  --color-tape: var(--tape);
+  --color-overlay: var(--overlay);
+}
+
+:root {
+  --radius: 0.25rem;
+
+  --ivory: oklch(0.979 0.007 88.6);
+  --cream: oklch(0.948 0.016 82.8);
+  --sky: oklch(0.93 0.021 241.4);
+  --sage: oklch(0.918 0.024 135.7);
+  --lavender: oklch(0.923 0.023 305.6);
+  --peach: oklch(0.917 0.03 56);
+  --butter: oklch(0.939 0.043 94.1);
+
+  --sky-ink: oklch(0.45 0.06 244);
+  --sage-ink: oklch(0.45 0.06 138);
+  --lavender-ink: oklch(0.45 0.07 305);
+  --peach-ink: oklch(0.5 0.09 45);
+  --butter-ink: oklch(0.48 0.07 85);
+
+  --ink: oklch(0.288 0.006 258.4);
+  --annotation: oklch(0.581 0.122 43.8);
+  --tape: oklch(0.93 0.04 94 / 0.75);
+  --overlay: oklch(0.948 0.016 82.8 / 0.82);
+
+  --background: var(--ivory);
+  --foreground: var(--ink);
+  --card: oklch(0.992 0.004 88);
+  --card-foreground: var(--ink);
+  --popover: var(--ivory);
+  --popover-foreground: var(--ink);
+  --primary: var(--ink);
+  --primary-foreground: var(--ivory);
+  --secondary: var(--cream);
+  --secondary-foreground: var(--ink);
+  --muted: var(--cream);
+  --muted-foreground: oklch(0.52 0 0);
+  --accent: var(--butter);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.577 0.2 27);
+  --destructive-foreground: var(--ivory);
+  --border: oklch(0.86 0.014 82);
+  --input: oklch(0.86 0.014 82);
+  --ring: var(--annotation);
+
+  --shadow-pin: 0 1px 0 oklch(0.288 0.006 258 / 0.04), 0 10px 24px -14px oklch(0.4 0.03 60 / 0.35);
+  --shadow-lift: 0 2px 0 oklch(0.288 0.006 258 / 0.05), 0 22px 40px -20px oklch(0.4 0.03 60 / 0.45);
+  --paper-grain: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.35  0 0 0 0 0.3  0 0 0 0 0.22  0 0 0 0.07 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5.5rem;
+  }
+  body {
+    background-color: var(--color-background);
+    background-image: var(--paper-grain);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--butter);
+    color: var(--ink);
+  }
+  :focus-visible {
+    outline: 2px solid var(--annotation);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+/* ---------- Type ---------- */
+@utility font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+@utility font-hand {
+  font-family: var(--font-hand);
+  line-height: 1.05;
+}
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+
+/* ---------- Surfaces ---------- */
+@utility paper {
+  background-image: var(--paper-grain);
+}
+@utility graph-paper {
+  background-image:
+    linear-gradient(oklch(0.45 0.06 244 / 0.09) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.45 0.06 244 / 0.09) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+@utility dot-paper {
+  background-image: radial-gradient(oklch(0.288 0.006 258 / 0.14) 1px, transparent 1.2px);
+  background-size: 18px 18px;
+}
+@utility shadow-pin {
+  box-shadow: var(--shadow-pin);
+}
+@utility shadow-lift {
+  box-shadow: var(--shadow-lift);
+}
+
+/* A strip of washi tape; position with top/left utilities */
+@utility tape {
+  position: absolute;
+  width: 5.5rem;
+  height: 1.4rem;
+  background: var(--tape);
+  background-image: var(--paper-grain);
+  box-shadow: 0 1px 2px oklch(0.4 0.03 60 / 0.15);
+  z-index: 2;
+}
+
+/* Card that settles straight on hover */
+@utility pin-card {
+  transition:
+    transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+    box-shadow 0.5s ease;
+  box-shadow: var(--shadow-pin);
+  &:hover {
+    transform: translateY(-4px) rotate(0deg);
+    box-shadow: var(--shadow-lift);
+  }
+}
+
+/* Ticket edge used by the practice log */
+@utility perforated {
+  --hole: 7px;
+  mask: radial-gradient(circle at 0 50%, transparent var(--hole), black calc(var(--hole) + 0.5px)) left / 51% 100% no-repeat,
+    radial-gradient(circle at 100% 50%, transparent var(--hole), black calc(var(--hole) + 0.5px)) right / 51% 100% no-repeat;
+}
+
+/* Hand-drawn underline for links and active nav */
+@utility scribble-underline {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 8' preserveAspectRatio='none'><path d='M1 5.5C20 2 38 6.5 60 4s40-3 59 .5' fill='none' stroke='%23B5603A' stroke-width='1.6' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 0.45em;
+  padding-bottom: 0.15em;
+}
+
+/* Small tag chip used for tech stacks */
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.02em;
+  padding: 0.2rem 0.55rem;
+  border: 1px solid oklch(0.288 0.006 258 / 0.16);
+  border-radius: 2px;
+  background: oklch(1 0 0 / 0.55);
+  white-space: nowrap;
+}
+
+/* ---------- Buttons ---------- */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.2rem;
+  border-radius: 2px;
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+@utility btn-ink {
+  background: var(--ink);
+  color: var(--ivory);
+  box-shadow: 3px 3px 0 var(--annotation);
+  &:hover {
+    box-shadow: 5px 5px 0 var(--annotation);
+  }
+}
+@utility btn-paper {
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--ink);
+  &:hover {
+    background: var(--butter);
+  }
+}
+@utility btn-ghost {
+  color: var(--ink);
+  padding-left: 0;
+  padding-right: 0;
+  &:hover {
+    color: var(--annotation);
+  }
+}
+
+/* ---------- Motion ---------- */
+@utility reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  &[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    opacity: 1;
+    transform: none;
+  }
+}
+@utility draw-path {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: draw 1.6s 0.6s cubic-bezier(0.6, 0, 0.3, 1) forwards;
+}
+@utility scroll-line {
+  animation: scroll-line 2.2s ease-in-out infinite;
+  transform-origin: top;
+}
+
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes scroll-line {
+  0% {
+    transform: scaleY(0);
+    opacity: 1;
+  }
+  55% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 0;
+  }
+}
+
+/* Hero dynamics */
+@utility word-in {
+  display: inline-block;
+  animation: word-in 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@utility ping-dot {
+  animation: ping-dot 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@utility float-a {
+  animation: float-a 6s ease-in-out infinite;
+}
+@utility float-b {
+  animation: float-b 7s ease-in-out infinite;
+}
+@keyframes word-in {
+  from { opacity: 0; transform: translateY(0.6em); filter: blur(2px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@keyframes ping-dot {
+  75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes float-a {
+  0%, 100% { transform: rotate(-4deg) translateY(0); }
+  50% { transform: rotate(-2deg) translateY(-8px); }
+}
+@keyframes float-b {
+  0%, 100% { transform: rotate(3deg) translateY(0); }
+  50% { transform: rotate(5deg) translateY(-6px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .word-in, .ping-dot, .float-a, .float-b { animation: none; }
+}
